@@ -1,9 +1,8 @@
 #include "dialog_billentry.h"
+
 #include "ui_dialog_billentry.h"
 
-DialogBillEntry::DialogBillEntry(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::DialogBillEntry)
+DialogBillEntry::DialogBillEntry(QWidget *parent) : QDialog(parent), ui(new Ui::DialogBillEntry)
 {
     ui->setupUi(this);
 
@@ -12,9 +11,15 @@ DialogBillEntry::DialogBillEntry(QWidget *parent) :
     connect(this, SIGNAL(accepted()), this, SLOT(on_accepted()));
 }
 
-DialogBillEntry::~DialogBillEntry()
+DialogBillEntry::~DialogBillEntry() { delete ui; }
+
+void DialogBillEntry::setupContents(const BillEntry &info)
 {
-    delete ui;
+    m_result.uuid = info.uuid;
+    ui->lineEdit->setText(info.name);
+    ui->spinBox_interval->setValue(info.interval);
+    ui->doubleSpinBox_amount->setValue(info.amount);
+    ui->dateEdit_occurance->setDateTime(info.last_occurance);
 }
 
 void DialogBillEntry::on_accepted()

@@ -1,6 +1,6 @@
-#include "widgetmain.h"
-
 #include <QApplication>
+
+#include "widgetmain.h"
 
 int main(int argc, char *argv[])
 {
